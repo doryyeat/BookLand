@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Вход</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page login-page">
+    <section class="clean-block">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark">Вход</h2>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6">
+                    <div th:if="${param.error}" class="alert alert-warning text-center" role="alert">
+                        <strong>Некорректный ввод электронной почты и пароля!</strong>
+                    </div>
+                    <form action="/login" method="post" class="p-3 rounded bg-gradient shadow">
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Эл. почта</label>
+                            <input class="form-control" type="email" id="username" name="username">
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Пароль</label>
+                            <input class="form-control" type="password" id="password" name="password">
+                        </div>
+                        <button class="btn btn-primary w-100" type="submit">Войти</button>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+<div th:insert="blocks/footer :: footer" class="mt-auto"></div>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

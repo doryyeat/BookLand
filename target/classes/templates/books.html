@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${title}"></title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page">
+    <section class="clean-block clean-catalog">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark" th:text="${title}"></h2>
+            </div>
+            <form th:if="${title != 'Для вас'}" th:action="${'/books/genre/' + genre + '/search'}" method="get" class="row mb-5">
+                <div class="col-auto">
+                    <a class="btn btn-secondary" th:href="${'/books/genre/' + genre}">Сбросить</a>
+                </div>
+                <div class="col">
+                    <input type="text" class="form-control" name="name" placeholder="Наименование" th:value="${name}">
+                </div>
+                <div class="col">
+                    <select name="category" required class="form-select">
+                        <option th:each="i : ${categories}" th:value="${i}" th:label="${i.name}"
+                                th:selected="${i == category}"></option>
+                    </select>
+                </div>
+                <div class="col-auto">
+                    <button class="btn btn-primary" type="submit">Поиск</button>
+                </div>
+            </form>
+
+            <div th:if="${books.isEmpty()}" class="text-center">
+                <p class="fs-3" th:text="${message}"></p>
+            </div>
+
+            <div class="row">
+                <div th:each="c : ${books}" class="col-12 col-md-6 col-lg-4">
+                    <div class="p-2 shadow rounded">
+                        <div class="text-center d-flex align-items-center justify-content-center" style="height: 300px">
+                            <a th:href="'/books/' + ${c.id}">
+                                <img class="rounded shadow" style="max-width: 100%;max-height: 300px"
+                                     th:src="'/img/' + ${c.photos[0]}">
+                            </a>
+                        </div>
+                        <p class="fs-4 text-center mb-1">
+                            <a th:href="'/books/' + ${c.id}" th:text="${c.name}"></a>
+                        </p>
+                        <p class="fs-5 m-0">Статус:&nbsp;<span th:text="${c.status.name}"></span></p>
+                        <p class="fs-5 m-0" th:text="${'Автор: ' + c.description.author}"></p>
+                        <p class="fs-5 m-0" th:text="${'Жанр: ' + c.description.genre.name}"></p>
+                        <p class="fs-5 m-0" th:text="${'Возрастная категория: ' + c.description.category.name}"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </section>
+</main>
+
+<div th:insert="blocks/footer :: footer" class="mt-auto"></div>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

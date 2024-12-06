@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Редактировать</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page product-page">
+    <section class="clean-block clean-product">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark">Редактировать</h2>
+            </div>
+            <div class="block-content">
+                <form th:action="'/books/edit/' + ${book.id}" method="post" enctype="multipart/form-data">
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Название книги</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="text" required name="name"
+                                                        th:value="${book.name}"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>ISBN</p>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" required name="isbn" th:value="${book.isbn}"
+                                           pattern="[0-9]{13}" minlength="13" maxlength="13">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Дата</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="date" required name="date"
+                                                        th:value="${book.date}"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Автор</p>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" required name="author"
+                                           pattern="^([a-zA-Zа-яА-ЯёЁ]+(\s[a-zA-Zа-яА-ЯёЁ]+){1,2})$" th:value="${book.description.author}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Издательство</p>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="text" required name="pub"
+                                           pattern="[A-Za-zА-Яа-я]+" th:value="${book.pub}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Возрастная категория</p>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" name="category">
+                                        <option th:each="f : ${categories}" th:value="${f}" th:label="${f.name}"
+                                                th:selected="${book.description.category == f}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Жанр</p>
+                                </div>
+                                <div class="col">
+                                    <select class="form-select" name="genre">
+                                        <option th:each="t : ${genres}" th:value="${t}"
+                                                th:label="${t.name}"
+                                                th:selected="${book.description.genre == t}"></option>
+                                    </select>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Количество страниц</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="number" min="1"
+                                                        step="1" required name="quantity"
+                                                        th:value="${book.description.quantity}"></div>
+                            </div>
+                        </div>
+                        <div class="col-6 mb-2">
+                            <div class="row">
+                                <div class="col-4">
+                                    <p>Фотография</p>
+                                </div>
+                                <div class="col">
+                                    <input class="form-control" type="file" multiple
+                                           accept="image/*" name="photos"></div>
+                            </div>
+                        </div>
+                        <div class="col-12 mb-2">
+                            <div class="row">
+                                <div class="col-2">
+                                    <p>Краткая аннотация</p>
+                                </div>
+                                <div class="col"><input class="form-control" type="text" required name="description"
+                                                        th:value="${book.description.description}">
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row" style="margin-bottom: 5px;">
+                        <div class="col">
+                            <button class="btn btn-primary" type="submit" style="margin-right: 15px;">Обновить</button>
+                            <button class="btn btn-secondary" type="reset">Очистить</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:insert="blocks/footer :: footer" class="mt-auto"></div>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

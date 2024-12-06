@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title th:text="${title}"></title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+
+<div th:insert="blocks/nav :: nav"></div>
+
+<main class="page catalog-page">
+    <section class="clean-block clean-catalog">
+        <div class="container">
+
+            <div class="block-heading">
+                <h2 class="text-dark">Профиль</h2>
+            </div>
+
+            <form action="/account/update/name" method="post" class="row">
+                <div class="col-12 mb-2">
+                    <input type="text" name="name" class="form-control" th:value="${user.name}" placeholder="Имя">
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success w-100">Обновить имя</button>
+                </div>
+            </form>
+
+            <hr>
+
+            <form action="/account/update" method="post" class="row">
+                <div class="col-4 mb-2 form-check fs-4 d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="fantasy" id="fantasy"
+                               th:checked="${user.fantasy}">
+                        <label class="form-check-label" for="fantasy">
+                            Фантастика
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4 mb-2 form-check fs-4 d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="horror" id="horror"
+                               th:checked="${user.horror}">
+                        <label class="form-check-label" for="horror">
+                            Ужасы
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4 mb-2 form-check fs-4 d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="detective" id="detective"
+                               th:checked="${user.detective}">
+                        <label class="form-check-label" for="detective">
+                            Детектив
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4 mb-2 form-check fs-4 d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="romance" id="romance"
+                               th:checked="${user.romance}">
+                        <label class="form-check-label" for="romance">
+                            Романы
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4 mb-2 form-check fs-4 d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="psychology" id="psychology"
+                               th:checked="${user.psychology}">
+                        <label class="form-check-label" for="psychology">
+                            Психология
+                        </label>
+                    </div>
+                </div>
+                <div class="col-4 mb-2 form-check fs-4 d-flex justify-content-center">
+                    <div>
+                        <input class="form-check-input" type="checkbox" name="classic" id="classic"
+                               th:checked="${user.classic}">
+                        <label class="form-check-label" for="classic">
+                            Классика
+                        </label>
+                    </div>
+                </div>
+                <div class="col-12">
+                    <button type="submit" class="btn btn-success w-100">Обновить</button>
+                </div>
+            </form>
+
+        </div>
+
+    </section>
+</main>
+
+<div th:insert="blocks/footer :: footer" class="mt-auto"></div>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

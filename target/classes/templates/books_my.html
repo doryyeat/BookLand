@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Забронировано</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page catalog-page">
+    <section class="clean-block clean-catalog">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark">Забронировано</h2>
+            </div>
+            <div class="content">
+                <div class="row g-0 p-2">
+                    <div th:each="c : ${books}" class="col-12 col-md-6 col-lg-4 col-xl-3 p-2 mb-2">
+                        <div class="clean-product-item bg-gradient shadow rounded">
+                            <div class="image">
+                                <a th:href="'/books/' + ${c.id}">
+                                    <img class="img-fluid d-block mx-auto" th:src="'/img/' + ${c.photos[0]}">
+                                </a>
+                            </div>
+                            <div class="product-name"><a th:href="'/books/' + ${c.id}" th:text="${c.name}"></a></div>
+                            <p class="fs-6 mb-2" th:text="${'До: ' + c.dateFree}"></p>
+                            <a th:if="${c.status.name() == 'BOOKED'}" class="btn btn-warning w-100" th:href="'/books/taken/' + ${c.id}">Получить</a>
+                            <a th:if="${c.status.name() == 'TAKEN'}" class="btn btn-warning w-100" th:href="'/books/return/' + ${c.id}">Вернуть</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+
+<div th:insert="blocks/footer :: footer" class="mt-auto"></div>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

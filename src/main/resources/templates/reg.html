@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="ru" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+    <title>Регистрация</title>
+</head>
+
+<head th:insert="blocks/head :: head"></head>
+
+<body class="d-flex flex-column min-vh-100">
+<div th:insert="blocks/nav :: nav"></div>
+<main class="page registration-page">
+    <section class="clean-block">
+        <div class="container">
+            <div class="block-heading">
+                <h2 class="text-dark">Регистрация</h2>
+            </div>
+            <div class="row">
+                <div class="col"></div>
+                <div class="col-6">
+                    <div th:if="${message}" class="alert alert-warning text-center" role="alert">
+                        <strong th:text="${message}"></strong>
+                    </div>
+                    <form method="post" action="/reg" class="p-3 rounded bg-gradient shadow">
+                        <div class="mb-3">
+                            <label class="form-label" for="name">Имя</label>
+                            <input class="form-control item" type="text" id="name" name="name" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="username">Эл. почта</label>
+                            <input class="form-control item" type="email" id="username" name="username" required>
+                        </div>
+                        <div class="mb-3">
+                            <label class="form-label" for="password">Пароль</label>
+                            <input class="form-control item" type="password" id="password" name="password" required>
+                        </div>
+                        <button class="btn btn-primary w-100" type="submit">Зарегистрироваться</button>
+                    </form>
+                </div>
+                <div class="col"></div>
+            </div>
+
+        </div>
+    </section>
+</main>
+
+
+<div th:insert="blocks/footer :: footer" class="mt-auto"></div>
+
+<script src="/js/bootstrap.min.js"></script>
+
+</body>
+
+</html>

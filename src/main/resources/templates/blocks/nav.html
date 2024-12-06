@@ -1,0 +1,106 @@
+<nav th:fragment="nav" class="navbar navbar-light navbar-expand-lg clean-navbar" style="background: #ffb758">
+    <div class="container">
+        <img src="/img/books.png" width="50">
+        <a class="navbar-brand logo" href="/">BookLand</a>
+        <button data-bs-toggle="collapse" class="navbar-toggler" data-bs-target="#navcol-1"><span
+                class="visually-hidden">Toggle navigation</span><span class="navbar-toggler-icon"></span></button>
+        <div class="collapse navbar-collapse" id="navcol-1">
+            <ul class="navbar-nav ms-auto me-auto align-items-center">
+                <li>
+                    <form class="d-flex" method="get" action="/books/search">
+                        <input class="form-control me-sm-2" type="search" name="search" th:value="${search}"
+                               placeholder="Поиск">
+                    </form>
+                </li>
+            </ul>
+            <ul class="navbar-nav ms-auto align-items-center">
+
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle text-center" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img src="/img/control.png" width="30">
+                        <br>
+                        Управление
+                    </a>
+                    <div class="dropdown-menu">
+                        <a class="dropdown-item text-center" href="/userAdd">
+                            <img src="/img/new-user.png" width="30">
+                            <br>
+                            Добавить пользователя
+                        </a>
+                        <a class="dropdown-item text-center" href="/books/add">
+                            <img src="/img/add.png" width="30">
+                            <br>
+                            Добавить книгу
+                        </a>
+                        <a class="dropdown-item text-center" href="/users">
+                            <img src="/img/users.png" width="30">
+                            <br>
+                            Пользователи
+                        </a>
+                        <a class="dropdown-item text-center" href="/statistics">
+                            <img src="/img/pie-chart.png" width="30">
+                            <br>
+                            Аналитика
+                        </a>
+                    </div>
+                </li>
+
+                <li class="nav-item dropdown text-center">
+                    <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button"
+                       aria-haspopup="true" aria-expanded="false">
+                        <img src="/img/catalog.png" width="30">
+                        <br>
+                        Каталог книг
+                    </a>
+                    <div class="dropdown-menu">
+                        <a th:each="i : ${genres}" class="dropdown-item" th:href="${'/books/genre/' + i}"
+                           th:text="${i.name}"></a>
+                    </div>
+                </li>
+                <li th:if="${role == 'CLIENT'}" class="nav-item text-center">
+                    <a class="nav-link" href="/books/liked">
+                        <img src="/img/favourite.png" width="30">
+                        <br>
+                        Для вас
+                    </a>
+                </li>
+                <li th:if="${role == 'CLIENT'}" class="nav-item text-center">
+                    <a class="nav-link" href="/books/my">
+                        <img src="/img/booking.png" width="30">
+                        <br>
+                        Забронировано
+                    </a>
+                </li>
+                <li th:if="${role == 'CLIENT'}" class="nav-item text-center">
+                    <a class="nav-link" href="/account">
+                        <img src="/img/user.png" width="30">
+                        <br>
+                        Профиль
+                    </a>
+                </li>
+                <li th:if="${role == 'NOT'}" class="nav-item text-center">
+                    <a class="nav-link" href="/login">
+                        <img src="/img/authentication.png" width="30">
+                        <br>
+                        Вход
+                    </a>
+                </li>
+                <li th:if="${role == 'NOT'}" class="nav-item text-center">
+                    <a class="nav-link" href="/reg">
+                        <img src="/img/reg.png" width="30">
+                        <br>
+                        Регистрация
+                    </a>
+                </li>
+                <li th:if="${role != 'NOT'}" class="nav-item text-center">
+                    <a class="nav-link" href="/logout">
+                        <img src="/img/exit.png" width="30">
+                        <br>
+                        Выход
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+</nav>
